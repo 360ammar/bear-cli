@@ -33,8 +33,8 @@ import { register as archiveCmd } from '../src/commands/archive.js';
 import { register as grabUrlCmd } from '../src/commands/grab-url.js';
 
 program
-  .name('paw')
-  .description('CLI for Bear app')
+  .name('bear')
+  .description('Manage Bear notes from the command line')
   .version('0.1.0');
 
 const config = { getToken, setToken };

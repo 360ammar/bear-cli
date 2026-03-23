@@ -13,7 +13,7 @@ export async function runAuth(token, { config, log, callBear, prompt }) {
       }
       token = token.trim();
     } else {
-      log('Then run: paw auth <your-token>');
+      log('Then run: bear auth <your-token>');
       return;
     }
   }

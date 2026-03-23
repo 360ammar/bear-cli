@@ -25,7 +25,7 @@ export function register(program, { getToken, callBear }) {
     .action(async (url, opts) => {
       const token = getToken();
       if (!token) {
-        console.error('No API token found. Run `paw auth` to set up.');
+        console.error('No API token found. Run `bear auth` to set up.');
         process.exit(1);
       }
       const output = await runGrabUrl({

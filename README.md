@@ -1,8 +1,8 @@
-# paw
+# bear-cli
 
 Manage your [Bear](https://bear.app) notes from the command line. Create, search, tag, and organize notes without leaving your terminal.
 
-**macOS only** — Bear is a macOS/iOS app and `paw` communicates with the desktop version directly.
+**macOS only** — Bear is a macOS/iOS app and `bear` communicates with the desktop version directly.
 
 ## Install
 
@@ -21,15 +21,15 @@ Bear uses API tokens to authorize access to your notes. Here's how to get yours:
 Then run:
 
 ```
-paw auth
+bear auth
 ```
 
-Paste your token when prompted. `paw` will save it and verify it works by connecting to Bear.
+Paste your token when prompted. `bear` will save it and verify it works by connecting to Bear.
 
 You can also pass the token directly:
 
 ```
-paw auth XXXXXX-XXXXXX-XXXXXX
+bear auth XXXXXX-XXXXXX-XXXXXX
 ```
 
 Or set it as an environment variable (useful for scripts and CI):
@@ -46,67 +46,67 @@ Token resolution: environment variable takes priority over saved config.
 
 ```bash
 # Create a note
-paw create --title "Meeting Notes" --body "# Action Items" --tags "work,meetings"
+bear create --title "Meeting Notes" --body "# Action Items" --tags "work,meetings"
 
 # Open a note by id
-paw open --id 2E93B86F-3B4C-4A86-8B53-0C8BA28B58A9
+bear open --id 2E93B86F-3B4C-4A86-8B53-0C8BA28B58A9
 
 # Search your notes
-paw search "project plan"
+bear search "project plan"
 
 # Append text to an existing note
-paw add --id ABC-123 --text "- Buy groceries" --mode append
+bear add --id ABC-123 --text "- Buy groceries" --mode append
 
 # Attach a file (auto base64-encoded)
-paw add-file --id ABC-123 --file ./screenshot.png
+bear add-file --id ABC-123 --file ./screenshot.png
 
 # Save a webpage as a note
-paw grab https://example.com/article --tags "reading"
+bear grab https://example.com/article --tags "reading"
 ```
 
 ### Tags
 
 ```bash
 # List all tags
-paw tags
+bear tags
 
 # List notes with a specific tag
-paw tag work
+bear tag work
 
 # Rename a tag
-paw rename-tag "old-name" --new-name "new-name"
+bear rename-tag "old-name" --new-name "new-name"
 
 # Delete a tag
-paw delete-tag "unused-tag"
+bear delete-tag "unused-tag"
 ```
 
 ### Lists
 
 ```bash
 # Today's notes
-paw today
+bear today
 
 # Notes with todo items
-paw todo
+bear todo
 
 # Untagged notes
-paw untagged
+bear untagged
 
 # Locked notes
-paw locked
+bear locked
 ```
 
 ### Organize
 
 ```bash
 # Move a note to trash
-paw trash --id ABC-123
+bear trash --id ABC-123
 
 # Archive a note
-paw archive --id ABC-123
+bear archive --id ABC-123
 
 # Find and trash by search
-paw trash --search "old draft"
+bear trash --search "old draft"
 ```
 
 ## Flags
@@ -118,35 +118,35 @@ Every command supports:
 
 ```bash
 # Get all tags as JSON
-paw tags --json
+bear tags --json
 
 # Create a note silently
-paw create --title "Log Entry" --body "$(date)" --quiet
+bear create --title "Log Entry" --body "$(date)" --quiet
 ```
 
-Run `paw <command> --help` for all available options.
+Run `bear <command> --help` for all available options.
 
 ## Command Reference
 
 | Command | Description |
 |---------|-------------|
-| `paw auth [token]` | Authenticate with Bear |
-| `paw create` | Create a new note |
-| `paw open` | Open a note |
-| `paw add` | Add text to a note |
-| `paw add-file` | Attach a file to a note |
-| `paw search [term]` | Search notes |
-| `paw tags` | List all tags |
-| `paw tag [name]` | List notes with a tag |
-| `paw rename-tag [name]` | Rename a tag |
-| `paw delete-tag [name]` | Delete a tag |
-| `paw trash` | Trash a note |
-| `paw archive` | Archive a note |
-| `paw untagged` | List untagged notes |
-| `paw todo` | List notes with todos |
-| `paw today` | List today's notes |
-| `paw locked` | List locked notes |
-| `paw grab [url]` | Save a webpage as a note |
+| `bear auth [token]` | Authenticate with Bear |
+| `bear create` | Create a new note |
+| `bear open` | Open a note |
+| `bear add` | Add text to a note |
+| `bear add-file` | Attach a file to a note |
+| `bear search [term]` | Search notes |
+| `bear tags` | List all tags |
+| `bear tag [name]` | List notes with a tag |
+| `bear rename-tag [name]` | Rename a tag |
+| `bear delete-tag [name]` | Delete a tag |
+| `bear trash` | Trash a note |
+| `bear archive` | Archive a note |
+| `bear untagged` | List untagged notes |
+| `bear todo` | List notes with todos |
+| `bear today` | List today's notes |
+| `bear locked` | List locked notes |
+| `bear grab [url]` | Save a webpage as a note |
 
 ## License
 

@@ -4,7 +4,7 @@
   "description": "Manage Bear notes from the command line",
   "type": "module",
   "bin": {
-    "paw": "./bin/paw.js"
+    "bear": "./bin/bear.js"
   },
   "scripts": {
     "test": "node --test test/**/*.test.js"

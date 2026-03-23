@@ -1,9 +1,9 @@
-# paw-cli
+# bear-cli
 
-A Node.js CLI wrapping Bear app's x-callback-url API.
+A Node.js CLI for managing Bear app notes from the terminal.
 
 ## Project Structure
-- `bin/paw.js` — Entry point, Commander setup
+- `bin/bear.js` — Entry point, Commander setup
 - `src/bear.js` — Core: builds URLs, executes via `open`, captures response via ephemeral HTTP server
 - `src/config.js` — Token storage (~/.config/paw/config.json) + env var resolution
 - `src/commands/*.js` — One file per CLI command
@@ -20,6 +20,7 @@ A Node.js CLI wrapping Bear app's x-callback-url API.
 - `--quiet` flag maps to Bear's `show_window=no`
 - All URL params use `encodeURIComponent` (no `+` encoding bugs)
 - 5 second timeout for Bear responses
+- Binary is `bear`, package is `bear-cli`
 
 ## Git Conventions
 - No Claude attribution in commits
