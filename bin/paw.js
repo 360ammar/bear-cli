@@ -1,5 +1,16 @@
 #!/usr/bin/env node
 
+process.on('unhandledRejection', (err) => {
+  if (err.message.includes('Bear did not respond')) {
+    console.error('Bear did not respond. The app may be locked or not running.');
+  } else if (err.message.includes('ECONNREFUSED')) {
+    console.error('Bear is not running. Please open Bear and try again.');
+  } else {
+    console.error(`Error: ${err.message}`);
+  }
+  process.exit(1);
+});
+
 import { program } from 'commander';
 import { getToken, setToken, createConfig } from '../src/config.js';
 import { callBear } from '../src/bear.js';
