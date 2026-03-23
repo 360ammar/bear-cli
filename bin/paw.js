@@ -10,6 +10,16 @@ import { register as createCmd } from '../src/commands/create.js';
 import { register as openNoteCmd } from '../src/commands/open-note.js';
 import { register as addTextCmd } from '../src/commands/add-text.js';
 import { register as addFileCmd } from '../src/commands/add-file.js';
+import { register as openTagCmd } from '../src/commands/open-tag.js';
+import { register as renameTagCmd } from '../src/commands/rename-tag.js';
+import { register as deleteTagCmd } from '../src/commands/delete-tag.js';
+import { register as untaggedCmd } from '../src/commands/untagged.js';
+import { register as todoCmd } from '../src/commands/todo.js';
+import { register as todayCmd } from '../src/commands/today.js';
+import { register as lockedCmd } from '../src/commands/locked.js';
+import { register as trashCmd } from '../src/commands/trash.js';
+import { register as archiveCmd } from '../src/commands/archive.js';
+import { register as grabUrlCmd } from '../src/commands/grab-url.js';
 
 program
   .name('paw')
@@ -25,5 +35,15 @@ createCmd(program, { getToken, callBear });
 openNoteCmd(program, { getToken, callBear });
 addTextCmd(program, { getToken, callBear });
 addFileCmd(program, { getToken, callBear });
+openTagCmd(program, { getToken, callBear });
+renameTagCmd(program, { getToken, callBear });
+deleteTagCmd(program, { getToken, callBear });
+untaggedCmd(program, { getToken, callBear });
+todoCmd(program, { getToken, callBear });
+todayCmd(program, { getToken, callBear });
+lockedCmd(program, { getToken, callBear });
+trashCmd(program, { getToken, callBear });
+archiveCmd(program, { getToken, callBear });
+grabUrlCmd(program, { getToken, callBear });
 
 program.parse();
