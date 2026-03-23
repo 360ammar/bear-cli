@@ -7,7 +7,7 @@ Manage your [Bear](https://bear.app) notes from the command line. Create, search
 ## Install
 
 ```
-npm install -g paw-cli
+npm install -g bear-cli
 ```
 
 ## Authentication

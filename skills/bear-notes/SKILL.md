@@ -12,7 +12,7 @@ Manage Bear app notes via the `paw` CLI. Requires macOS with Bear installed and 
 If `paw` is not installed:
 
 ```bash
-npm install -g paw-cli
+npm install -g bear-cli
 ```
 
 Then authenticate (the user will need their Bear API token from Bear > Help > Advanced > API Token):

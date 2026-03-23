@@ -1,7 +1,7 @@
 {
-  "name": "paw-cli",
+  "name": "bear-cli",
   "version": "0.1.0",
-  "description": "CLI for Bear app's x-callback-url API",
+  "description": "Manage Bear notes from the command line",
   "type": "module",
   "bin": {
     "paw": "./bin/paw.js"
