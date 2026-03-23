@@ -1,0 +1,21 @@
+{
+  "name": "paw-cli",
+  "version": "0.1.0",
+  "description": "CLI for Bear app's x-callback-url API",
+  "type": "module",
+  "bin": {
+    "paw": "./bin/paw.js"
+  },
+  "scripts": {
+    "test": "node --test test/**/*.test.js"
+  },
+  "keywords": [
+    "bear",
+    "cli",
+    "notes"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.3"
+  }
+}
