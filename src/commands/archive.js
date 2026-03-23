@@ -7,7 +7,7 @@ export async function runArchive({ id, search, callBear, token, json, quiet }) {
   });
 
   if (json) {
-    return JSON.stringify(response);
+    return JSON.stringify(response, null, 2);
   }
 
   return 'Note archived.';

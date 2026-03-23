@@ -1,5 +1,5 @@
 export async function runRenameTag({ name, newName, callBear, token, json, quiet }) {
-  await callBear('rename-tag', {
+  const response = await callBear('rename-tag', {
     token,
     name,
     new_name: newName,
@@ -7,7 +7,7 @@ export async function runRenameTag({ name, newName, callBear, token, json, quiet
   });
 
   if (json) {
-    return JSON.stringify({ name, newName });
+    return JSON.stringify(response, null, 2);
   }
 
   return `Renamed "${name}" to "${newName}"`;

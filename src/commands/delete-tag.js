@@ -1,12 +1,12 @@
 export async function runDeleteTag({ name, callBear, token, json, quiet }) {
-  await callBear('delete-tag', {
+  const response = await callBear('delete-tag', {
     token,
     name,
     show_window: quiet ? 'no' : undefined,
   });
 
   if (json) {
-    return JSON.stringify({ name });
+    return JSON.stringify(response, null, 2);
   }
 
   return `Deleted tag "${name}"`;

@@ -25,6 +25,10 @@ export function register(program, { getToken, callBear }) {
     .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (opts) => {
       const token = getToken();
+      if (!token) {
+        console.error('No API token found. Run `paw auth` to set up.');
+        process.exit(1);
+      }
       const output = await runAddText({ ...opts, callBear, token });
       console.log(output);
     });
