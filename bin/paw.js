@@ -4,6 +4,8 @@ import { program } from 'commander';
 import { getToken, setToken, createConfig } from '../src/config.js';
 import { callBear } from '../src/bear.js';
 import { register as authCmd } from '../src/commands/auth.js';
+import { register as tagsCmd } from '../src/commands/tags.js';
+import { register as searchCmd } from '../src/commands/search.js';
 
 program
   .name('paw')
@@ -13,5 +15,7 @@ program
 const config = { getToken, setToken };
 
 authCmd(program, { config, callBear });
+tagsCmd(program, { getToken, callBear });
+searchCmd(program, { getToken, callBear });
 
 program.parse();
