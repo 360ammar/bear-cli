@@ -1,18 +1,18 @@
-# bear-cli
+# bear-cub
 
 Manage your [Bear](https://bear.app) notes from the command line. Create, search, tag, and organize notes without leaving your terminal.
 
-**macOS only** — Bear is a macOS/iOS app and `bear` communicates with the desktop version directly.
+**macOS only** — Bear is a macOS/iOS app and `bear` communicates with the desktop version via [urlhook](https://github.com/360ammar/urlhook).
 
 ## Install
 
 ```
-npm install -g bear-cli
+npm install -g bear-cub
 ```
 
 ## Authentication
 
-Bear uses API tokens to authorize access to your notes. Here's how to get yours:
+Bear uses API tokens to authorize access to your notes:
 
 1. Open **Bear** on your Mac
 2. Go to **Help** > **Advanced** > **API Token**
@@ -24,88 +24,54 @@ Then run:
 bear auth
 ```
 
-Paste your token when prompted. `bear` will save it and verify it works by connecting to Bear.
+Paste your token when prompted.
 
-You can also pass the token directly:
+You can also pass the token directly or set it as an environment variable:
 
-```
+```bash
 bear auth XXXXXX-XXXXXX-XXXXXX
-```
-
-Or set it as an environment variable (useful for scripts and CI):
-
-```
+# or
 export BEAR_API_TOKEN=XXXXXX-XXXXXX-XXXXXX
 ```
 
-Token resolution: environment variable takes priority over saved config.
+Token resolution: environment variable takes priority over saved config (`~/.config/bear/config.json`).
 
 ## Usage
 
 ### Notes
 
 ```bash
-# Create a note
 bear create --title "Meeting Notes" --body "# Action Items" --tags "work,meetings"
-
-# Open a note by id
 bear open --id 2E93B86F-3B4C-4A86-8B53-0C8BA28B58A9
-
-# Search your notes
 bear search "project plan"
-
-# Append text to an existing note
 bear add --id ABC-123 --text "- Buy groceries" --mode append
-
-# Attach a file (auto base64-encoded)
 bear add-file --id ABC-123 --file ./screenshot.png
-
-# Save a webpage as a note
 bear grab https://example.com/article --tags "reading"
 ```
 
 ### Tags
 
 ```bash
-# List all tags
 bear tags
-
-# List notes with a specific tag
 bear tag work
-
-# Rename a tag
 bear rename-tag "old-name" --new-name "new-name"
-
-# Delete a tag
 bear delete-tag "unused-tag"
 ```
 
 ### Lists
 
 ```bash
-# Today's notes
 bear today
-
-# Notes with todo items
 bear todo
-
-# Untagged notes
 bear untagged
-
-# Locked notes
 bear locked
 ```
 
 ### Organize
 
 ```bash
-# Move a note to trash
 bear trash --id ABC-123
-
-# Archive a note
 bear archive --id ABC-123
-
-# Find and trash by search
 bear trash --search "old draft"
 ```
 
@@ -114,14 +80,11 @@ bear trash --search "old draft"
 Every command supports:
 
 - `--json` — Output raw JSON for scripting and piping
-- `-q, --quiet` — Run without bringing Bear to the foreground
+- `--help` — Show command options
 
 ```bash
-# Get all tags as JSON
 bear tags --json
-
-# Create a note silently
-bear create --title "Log Entry" --body "$(date)" --quiet
+bear search "notes" --tag "work" --json
 ```
 
 Run `bear <command> --help` for all available options.
@@ -147,6 +110,12 @@ Run `bear <command> --help` for all available options.
 | `bear today` | List today's notes |
 | `bear locked` | List locked notes |
 | `bear grab [url]` | Save a webpage as a note |
+
+## Agent Skill
+
+bear-cub ships with an [Agent Skill](https://agentskills.io) at `.agents/skills/bear-cli/SKILL.md`. This lets AI coding agents (GitHub Copilot, Claude Code, Codex, etc.) automatically use the Bear CLI when you ask them to manage your notes.
+
+The skill activates when you mention Bear notes, tags, or note management in your agent conversation. No setup needed — agents discover it automatically from your project.
 
 ## License
 
