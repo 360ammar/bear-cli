@@ -1,10 +1,9 @@
-export async function runGrabUrl({ url, tags, pin, callBear, token, json, quiet }) {
+export async function runGrabUrl({ url, tags, pin, callBear, token, json }) {
   const response = await callBear('grab-url', {
     token,
     url,
     tags,
     pin,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) {
@@ -21,7 +20,6 @@ export function register(program, { getToken, callBear }) {
     .option('--tags <tags>', 'Comma-separated tags')
     .option('--pin', 'Pin the note')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (url, opts) => {
       const token = getToken();
       if (!token) {
@@ -35,7 +33,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

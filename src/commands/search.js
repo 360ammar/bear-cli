@@ -1,9 +1,10 @@
-export async function runSearch({ term, tag, callBear, token, json, quiet }) {
+import { formatTitle } from '../bear.js';
+
+export async function runSearch({ term, tag, callBear, token, json }) {
   const response = await callBear('search', {
     token,
     term,
     tag,
-    show_window: quiet ? 'no' : undefined,
   });
 
   const notes = JSON.parse(response.notes || '[]');
@@ -16,7 +17,7 @@ export async function runSearch({ term, tag, callBear, token, json, quiet }) {
     return 'No notes found.';
   }
 
-  return notes.map(n => `${n.title}  [${n.identifier}]`).join('\n');
+  return notes.map(n => `${formatTitle(n.title)}  [${n.identifier}]`).join('\n');
 }
 
 export function register(program, { getToken, callBear }) {
@@ -25,7 +26,6 @@ export function register(program, { getToken, callBear }) {
     .description('Search notes')
     .option('-t, --tag <tag>', 'Filter by tag')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (term, opts) => {
       const token = getToken();
       if (!token) {
@@ -38,7 +38,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

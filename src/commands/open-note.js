@@ -1,8 +1,7 @@
-export async function runOpenNote({ id, title, header, pin, edit, newWindow, float, callBear, token, json, quiet }) {
+export async function runOpenNote({ id, title, header, pin, edit, newWindow, float, callBear, token, json }) {
   const response = await callBear('open-note', {
     token, id, title, header, pin, edit,
     new_window: newWindow, float,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) return JSON.stringify(response, null, 2);
@@ -25,7 +24,6 @@ export function register(program, { getToken, callBear }) {
     .option('--new-window', 'Open in new window')
     .option('--float', 'Open as floating window')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (opts) => {
       const token = getToken();
       if (!token) {

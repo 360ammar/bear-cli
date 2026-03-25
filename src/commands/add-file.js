@@ -1,10 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export async function runAddFile({ id, title, file, filename, header, mode, callBear, token, json, quiet }) {
+export async function runAddFile({ id, title, file, filename, header, mode, callBear, token, json }) {
   const response = await callBear('add-file', {
     token, id, title, file, filename, header, mode,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) return JSON.stringify(response, null, 2);
@@ -22,7 +21,6 @@ export function register(program, { getToken, callBear }) {
     .option('--header <header>', 'Header to add file under')
     .option('--mode <mode>', 'append, prepend, replace, or replace_all')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (opts) => {
       const token = getToken();
       if (!token) {

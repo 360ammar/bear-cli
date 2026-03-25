@@ -1,8 +1,9 @@
-export async function runUntagged({ search, callBear, token, json, quiet }) {
+import { formatTitle } from '../bear.js';
+
+export async function runUntagged({ search, callBear, token, json }) {
   const response = await callBear('untagged', {
     token,
     search,
-    show_window: quiet ? 'no' : undefined,
   });
 
   const notes = JSON.parse(response.notes || '[]');
@@ -15,7 +16,7 @@ export async function runUntagged({ search, callBear, token, json, quiet }) {
     return 'No notes found.';
   }
 
-  return notes.map(n => `${n.title}  [${n.identifier}]`).join('\n');
+  return notes.map(n => `${formatTitle(n.title)}  [${n.identifier}]`).join('\n');
 }
 
 export function register(program, { getToken, callBear }) {
@@ -24,7 +25,6 @@ export function register(program, { getToken, callBear }) {
     .description('List untagged notes')
     .option('-s, --search <term>', 'Filter by search term')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (opts) => {
       const token = getToken();
       if (!token) {
@@ -36,7 +36,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

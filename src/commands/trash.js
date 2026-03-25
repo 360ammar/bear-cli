@@ -1,9 +1,8 @@
-export async function runTrash({ id, search, callBear, token, json, quiet }) {
+export async function runTrash({ id, search, callBear, token, json }) {
   const response = await callBear('trash', {
     token,
     id,
     search,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) {
@@ -20,7 +19,6 @@ export function register(program, { getToken, callBear }) {
     .option('--id <id>', 'Note identifier')
     .option('-s, --search <term>', 'Search term to identify note')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (opts) => {
       const token = getToken();
       if (!token) {
@@ -33,7 +31,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

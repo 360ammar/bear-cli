@@ -1,8 +1,7 @@
-export async function runDeleteTag({ name, callBear, token, json, quiet }) {
+export async function runDeleteTag({ name, callBear, token, json }) {
   const response = await callBear('delete-tag', {
     token,
     name,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) {
@@ -17,7 +16,6 @@ export function register(program, { getToken, callBear }) {
     .command('delete-tag [name]')
     .description('Delete a tag')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (name, opts) => {
       const token = getToken();
       if (!token) {
@@ -29,7 +27,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

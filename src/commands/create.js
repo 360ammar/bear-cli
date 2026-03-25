@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export async function runCreate({ title, body, tags, file, filename, pin, edit, timestamp, html, callBear, token, json, quiet }) {
+export async function runCreate({ title, body, tags, file, filename, pin, edit, timestamp, html, callBear, token, json }) {
   let encodedFile = file;
   let resolvedFilename = filename;
   if (file && fs.existsSync(file)) {
@@ -16,7 +16,6 @@ export async function runCreate({ title, body, tags, file, filename, pin, edit, 
     file: encodedFile, filename: resolvedFilename,
     pin, edit, timestamp,
     type: html ? 'html' : undefined,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) return JSON.stringify(response, null, 2);
@@ -37,7 +36,6 @@ export function register(program, { getToken, callBear }) {
     .option('--timestamp', 'Prepend timestamp')
     .option('--html', 'Body is HTML')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (opts) => {
       const token = getToken();
       if (!token) {

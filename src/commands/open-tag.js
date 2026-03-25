@@ -1,8 +1,9 @@
-export async function runOpenTag({ name, callBear, token, json, quiet }) {
+import { formatTitle } from '../bear.js';
+
+export async function runOpenTag({ name, callBear, token, json }) {
   const response = await callBear('open-tag', {
     token,
     name,
-    show_window: quiet ? 'no' : undefined,
   });
 
   const notes = JSON.parse(response.notes || '[]');
@@ -15,7 +16,7 @@ export async function runOpenTag({ name, callBear, token, json, quiet }) {
     return 'No notes found.';
   }
 
-  return notes.map(n => `${n.title}  [${n.identifier}]`).join('\n');
+  return notes.map(n => `${formatTitle(n.title)}  [${n.identifier}]`).join('\n');
 }
 
 export function register(program, { getToken, callBear }) {
@@ -23,7 +24,6 @@ export function register(program, { getToken, callBear }) {
     .command('tag [name]')
     .description('Open a tag and list its notes')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (name, opts) => {
       const token = getToken();
       if (!token) {
@@ -35,7 +35,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

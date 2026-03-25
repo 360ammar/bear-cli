@@ -1,9 +1,8 @@
-export async function runRenameTag({ name, newName, callBear, token, json, quiet }) {
+export async function runRenameTag({ name, newName, callBear, token, json }) {
   const response = await callBear('rename-tag', {
     token,
     name,
     new_name: newName,
-    show_window: quiet ? 'no' : undefined,
   });
 
   if (json) {
@@ -19,7 +18,6 @@ export function register(program, { getToken, callBear }) {
     .description('Rename a tag')
     .requiredOption('--new-name <newName>', 'New tag name')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', "Don't open Bear window")
     .action(async (name, opts) => {
       const token = getToken();
       if (!token) {
@@ -32,7 +30,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });

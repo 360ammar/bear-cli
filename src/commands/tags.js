@@ -1,5 +1,5 @@
-export async function runTags({ callBear, token, json, quiet }) {
-  const response = await callBear('tags', { token, show_window: quiet ? 'no' : undefined });
+export async function runTags({ callBear, token, json }) {
+  const response = await callBear('tags', { token });
   const tags = JSON.parse(response.tags || '[]');
 
   if (json) {
@@ -18,7 +18,6 @@ export function register(program, { getToken, callBear }) {
     .command('tags')
     .description('List all tags')
     .option('--json', 'Output as JSON')
-    .option('-q, --quiet', 'Don\'t open Bear window')
     .action(async (opts) => {
       const token = getToken();
       if (!token) {
@@ -29,7 +28,6 @@ export function register(program, { getToken, callBear }) {
         callBear,
         token,
         json: opts.json,
-        quiet: opts.quiet,
       });
       console.log(output);
     });
