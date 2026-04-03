@@ -1,5 +1,5 @@
 ---
-name: bear-notes
+name: bear-app
 description: Use when the user asks to create, search, read, tag, organize, archive, or trash notes in Bear app. Also use when managing Bear tags, saving webpages to Bear, or working with Bear notes from the terminal.
 compatibility: Requires macOS with Bear app installed and running, Node.js, and the bear-cub npm package.
 ---

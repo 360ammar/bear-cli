@@ -113,9 +113,17 @@ Run `bear <command> --help` for all available options.
 
 ## Agent Skill
 
-bear-cub ships with an [Agent Skill](https://agentskills.io) at `.agents/skills/bear-cli/SKILL.md`. This lets AI coding agents (GitHub Copilot, Claude Code, Codex, etc.) automatically use the Bear CLI when you ask them to manage your notes.
+bear-cub includes an [Agent Skill](https://agentskills.io) that lets AI coding agents (Claude Code, GitHub Copilot, Cursor, Windsurf, Codex, etc.) automatically use the Bear CLI when you ask them to manage your notes.
 
-The skill activates when you mention Bear notes, tags, or note management in your agent conversation. No setup needed — agents discover it automatically from your project.
+The skill activates when you mention Bear notes, tags, or note management in your agent conversation.
+
+### Installation
+
+```bash
+npx skills add https://github.com/360ammar/bear-cli --skill bear-app
+```
+
+This installs the `bear-app` skill into your project so agents can discover and use it automatically.
 
 ## License
 
